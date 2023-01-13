@@ -71,8 +71,11 @@ const getNeededExp = (level) => level * level * 10;
 const addExpToUser = async (userID, guildID, username, msg) => {
   try {
     const result = await User.findOneAndUpdate(
-      { userID, guildID, username },
-      { guildID, userID, username, $inc: { exp: 1 } },
+      { userID, guildID },
+      {
+        $set: { guildID, userID, username: msg.author.username },
+        $inc: { exp: 1 },
+      },
       { upsert: true, new: true }
     );
     console.log('Data has been saved to the DB!');
