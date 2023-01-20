@@ -56,7 +56,7 @@ const getWeather = async (userID) => {
 
 client.once(Events.ClientReady, (client) => {
   console.log(`Ready! Logged in as ${client.user.tag}`);
-  mongoose.connect('mongodb://127.0.0.1:27017/dicey', (error) => {
+  mongoose.connect(process.env.MONGOURL, (error) => {
     if (error) console.log(error);
     console.log('Connected to the database!');
   });
